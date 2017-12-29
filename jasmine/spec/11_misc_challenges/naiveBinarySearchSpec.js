@@ -57,17 +57,21 @@ describe('naiveBinarySearch (Iterative Version) Test Suite', function() {
     }
 
     //generate large string array
-    let hugeStrArray = [[]];
+    let hugeStrArray = generateWords();
 
-    function generateWord() {
+    function generateWords() {
       var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+      var words = [];
       for (var w = 0; w < 100000; w++) {
+        var word = '';
         for (var l = 0; l < 6; l++) {
           var num = getRndInteger(1, 26);
           var letter = letters[num];
-          hugeStrArray[w][l] = letter;
+          word = word.concat(letter);
         }
+        words.push(word);
       }
+      return words;
     }
 
     function getRndInteger(min, max) {
