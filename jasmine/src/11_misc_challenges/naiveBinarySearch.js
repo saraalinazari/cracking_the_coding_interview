@@ -21,7 +21,7 @@ function naiveBinarySearch(array, searchingFor, chosenProcess) {
 
       if (dividedArray.length > 1) {
         //check if middle value is higher or lower than searchedFor value and return remaining array
-        dividedArray = compare(searchingFor, middleOfArray, dividedArray);
+        dividedArray = compare(searchingFor, dividedArray);
         //repeat these steps whilst found value != searchingFor
       }
       
@@ -48,10 +48,30 @@ function naiveBinarySearch(array, searchingFor, chosenProcess) {
   }
 };
 
+
+
+function compare(searchingFor, array) {
+  debugger;
+  return (searchingFor > findMiddleValue(array) ? ifHigher : ifLower)(array);
+};
+
+function ifHigher(array) {
+  return array.slice(array.indexOf(findMiddleValue(array)) + 1);
+}
+
+function ifLower(array) {
+  return array.slice(0, array.indexOf(findMiddleValue(array)));
+}
+
+function findMiddleValue(array) {
+  let middlePosition = (Math.floor(array.length / 2));
+  return array[middlePosition];
+}
+
+/**
 function compare(searchingFor, middleOfArray, array) {
   return (searchingFor > middleOfArray ? ifHigher : ifLower)(array, middleOfArray);
 }
-
 function ifHigher(array, middleOfArray) {
   return array.slice(array.indexOf(middleOfArray) + 1);
 }
@@ -64,6 +84,7 @@ function findMiddleValue(array) {
   let middlePosition = (Math.floor(array.length / 2));
   return array[middlePosition];
 }
+*/
 
 function testDevHelper(array, searchingFor, chosenProcess) {
   //reset search counter in between test runs

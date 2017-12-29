@@ -28,6 +28,13 @@ describe('naiveBinarySearch (Iterative Version) Test Suite', function () {
     });
 
     it('should be able to find the matching value index of the original array and return this', function() {
+
+      let sortedArray = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 18,
+        19, 20
+      ];
+
       let result = naiveBinarySearch([1, 2, 3], 3, 'iterative');
       expect(result).toEqual(2);
     });
@@ -59,6 +66,10 @@ describe('naiveBinarySearch (Iterative Version) Test Suite', function () {
 
       naiveBinarySearch(array, 100000, 'iterative')
       expect(rangeOfResults.includes(testData.searches)).toBeTruthy();
+
+      
+      let foundWord = naiveBinarySearch(generateWords(), 'abcdef', 'iterative')
+      expect(foundWord).toBeTruthy();
 
     });
 
