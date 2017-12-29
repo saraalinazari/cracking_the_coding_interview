@@ -1,41 +1,95 @@
-function naiveBinarySearchIterative(sortedArray, searchingFor) {
+const testData = {
+  searches: 0
+}
 
-  //define variables for inital start and end values
+function naiveBinarySearch(array, searchingFor, chosenProcess) {
 
-  //find middle value
+  testDevHelper(array, searchingFor, chosenProcess);
+    
+  if (chosenProcess === 'iterative') {
+    testDevHelper(array, searchingFor, chosenProcess);
 
-  //check if middle value is higher or lower than searchedFor value
+    let initalMiddle, middleOfArray, lowerOrHigher, dividedArray, matchedIndex;
 
-  //if higher, make new end value this value
+    middleOfArray = findMiddleValue(array);
+    dividedArray = array.slice(0);
 
-  //if lower, make new start value this value
+    while (middleOfArray !== searchingFor && !matchedIndex) {
+      testData.searches++;
+      //find middle value
+      middleOfArray = findMiddleValue(dividedArray);
 
-  //repeat these steps whilst found value != searchingFor
-  //if found, assign to var matched
+      if (dividedArray.length > 1) {
+        //check if middle value is higher or lower than searchedFor value and return remaining array
+        dividedArray = compare(searchingFor, middleOfArray, dividedArray);
+        //repeat these steps whilst found value != searchingFor
+      }
+      
+      if (middleOfArray === searchingFor) {
+        matchedIndex = array.indexOf(middleOfArray);
+      }
+      
+    }
 
-  //return index of matched
+    //return index of matched
+    return matchedIndex;
+  }
+
+  if (chosenProcess === 'recursive') {
+
+    testDevHelper(array, searchingFor, chosenProcess);
+
+    //define variables for inital start and end values
+    //find middle value
+    //check if middle value is higher or lower than searchedFor value
+    //repeat these steps whilst found value != searchingFor
+    //if found, assign to var matched
+    //return index of matched
+  }
 };
 
-function naiveBinarySearchRecursive(sortedArray, searchingFor) {
+function compare(searchingFor, middleOfArray, array) {
+  return (searchingFor > middleOfArray ? ifHigher : ifLower)(array, middleOfArray);
+}
 
-  //define variables for inital start and end values
+function ifHigher(array, middleOfArray) {
+  return array.slice(array.indexOf(middleOfArray) + 1);
+}
 
-  //find middle value
+function ifLower(array, middleOfArray) {
+  return array.slice(0, array.indexOf(middleOfArray));
+}
 
-  //check if middle value is higher or lower than searchedFor value
+function findMiddleValue(array) {
+  let middlePosition = (Math.floor(array.length / 2));
+  return array[middlePosition];
+}
 
-  //if higher copy array with items past this chopped off
+function testDevHelper(array, searchingFor, chosenProcess) {
+  //reset search counter in between test runs
+  testData.searches = 0;
+  
+  //set parameter values for testing
+  sortedArray ? testData.passedArray = array : null;
+  searchingFor ? testData.searchingFor = searchingFor : null;
+  chosenProcess ? testData.chosenProcess = chosenProcess : null;
 
-  //if lower and copy array with items before this chopped off
+  testData.maximumSearches = Math.log2(array.length);
 
-  //repeat these steps recursively, passing in the sliced array and value of searched for
-
-  //return index of matched
-
-};
+    if (chosenProcess && chosenProcess !== 'recursive' && chosenProcess !== 'iterative') {
+      throw new TypeError('The third parameter must be either \'iterative\' or \'recursive\' to run');
+    }
+  };
 
 let sortedArray = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
   11, 12, 13, 14, 15, 16, 17, 18,
   19, 20
 ];
+
+let unsortedArray = [
+  17, 2, 12, 16, 10, 6, 1, 14, 9, 
+  8, 5, 11, 19, 15, 3, 7, 20, 4, 
+  18, 13
+];
+
