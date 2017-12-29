@@ -27,24 +27,44 @@ describe('naiveBinarySearch (Iterative Version) Test Suite', function () {
       fail();
     });
 
-    it('should be able to re-assign the start value if the first middle value is higher than the desired value', function () {
-      fail();
-    });
-
-    it('RECURSIVE ONLY - it should call itself with a new array that is the original array split at the inital division (split to the left)', function () {
-      fail();
-    });
-
-    it('RECURSIVE ONLY - it should call itself with a new array that is the original array split at the inital division (split to the right)', function () {
-      fail();
+    it('should be able to find the matching value index of the original array and return this', function() {
+      let result = naiveBinarySearch([1, 2, 3], 3, 'iterative');
+      expect(result).toEqual(2);
     });
 
     it('it should be able to work out the minimal number of searches required of any index', function () {
-      fail();
+      let array = [];
+      let i = 0;
+      while (i < 240000) {
+	      array[i] = i;
+	      i++;
+      }
+
+      let rangeOfResults = [15, 16, 17, 18]
+
+      naiveBinarySearch(array, 1, 'iterative')
+      expect(rangeOfResults.includes(testData.searches)).toBeTruthy();
+
+      naiveBinarySearch(array, 10, 'iterative')
+      expect(rangeOfResults.includes(testData.searches)).toBeTruthy();
+
+      naiveBinarySearch(array, 100, 'iterative')
+      expect(rangeOfResults.includes(testData.searches)).toBeTruthy();
+
+      naiveBinarySearch(array, 1000, 'iterative')
+      expect(rangeOfResults.includes(testData.searches)).toBeTruthy();
+
+      naiveBinarySearch(array, 10000, 'iterative')
+      expect(rangeOfResults.includes(testData.searches)).toBeTruthy();
+
+      naiveBinarySearch(array, 100000, 'iterative')
+      expect(rangeOfResults.includes(testData.searches)).toBeTruthy();
+
     });
 
     it('the number of actual searches required should match the predicted number of searches', function () {
-      fail();
+      naiveBinarySearch([1, 2, 3], 3, 'iterative');
+      expect(testData.searches).toEqual(2);
     });
 
   });
