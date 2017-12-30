@@ -21,6 +21,11 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
       result = binarySearch([1, 2, 4, 5, 6, 8], 5, 'iterative');
       expect(result).toEqual(3);
 
+      let words = binarySearchTester.generateWords();
+      words.sort();
+      result = binarySearch(words, 'abc', 'iterative');
+      expect(result).toEqual(words.indexOf('abc'))
+
     });
 
     it('it should be able to work out the minimal number of searches required of any index', function () {
@@ -35,25 +40,24 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
 
     it('the number of actual searches required should match the predicted number of searches', function () {
 
-      function createLargeNumArray() {
-        let largeNumArray = [];
-        var i = 0;
-        while (i < 240000) {
-          largeNumArray[i] = i;
-          i++;
-        }
+      // function createLargeNumArray() {
+      //   let largeNumArray = [];
+      //   var i = 0;
+      //   while (i < 240000) {
+      //     largeNumArray[i] = i;
+      //     i++;
+      //   }
 
-        return largeNumArray;
-      }
+      //   return largeNumArray;
+      // }
 
       function areSearchesWithinPredictedRange() {
-        return rangeOfResults.includes(testHelper.searches)
+        return predictedRangeOfSearches.includes(testHelper.searches)
       }
 
-      let largeNumArray = createLargeNumArray();
+      let largeNumArray = binarySearchTester.generateLargeNumArray();
 
-      let rangeOfResults = [15, 16, 17, 18]
-
+      let predictedRangeOfSearches = [15, 16, 17, 18]
 
       binarySearch(largeNumArray, 1, 'iterative')
       expect(areSearchesWithinPredictedRange()).toBeTruthy();
@@ -101,7 +105,33 @@ describe('error handling tests', function () {
   describe('invalid parameters', function () {
 
     it('it should require the user to choose iterative or recursive functionality before processing', function () {
-      fail();
+
+      let error;
+      
+      try {
+        binarySearch([1, 2, 3, 4, 5], 3)
+      } catch(e) {
+        error = e;
+      }
+
+      expect(error instanceof TypeError).toBe(true);
+
+      try {
+        binarySearch([1, 2, 3, 4, 5], 3, 'itertive')
+      } catch(e) {
+        error = e;
+      }
+
+      expect(error instanceof TypeError).toBe(true);
+
+      try {
+        binarySearch([1, 2, 3, 4, 5], 3, 'this won\'t work')
+      } catch(e) {
+        error = e;
+      }
+
+      expect(error instanceof TypeError).toBe(true);
+      
     });
 
     it('it should be able to detect unsorted arrays and ask the user for sorting parameters', function () {
@@ -112,43 +142,52 @@ describe('error handling tests', function () {
 });
 
 function init() {
-  let sortedArray = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-    11, 12, 13, 14, 15, 16, 17, 18,
-    19, 20
-  ];
-  
-  let unsortedArray = [
-    17, 2, 12, 16, 10, 6, 1, 14, 9, 
-    8, 5, 11, 19, 15, 3, 7, 20, 4, 
-    18, 13
-  ];
-  
-  let largeNumArray = [];
-  var i = 0;
-  while (i < 240000) {
-    largeNumArray[i] = i;
-    i++;
-  }
-  
-  //random array of strings generator
-  function generateWords() {
-    var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    var words = [];
-      while(!words.includes('abcd')) {
-          var word = '';
-          for (var l = 0; l < 4; l++) {
-            var num = getRndInteger(1, 26);
-            var letter = letters[num];
-            word = word.concat(letter);
-          }
-          words.push(word);
+
+  binarySearchTester = {
+
+    sortedArray: [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+      11, 12, 13, 14, 15, 16, 17, 18,
+      19, 20
+    ],
+    
+    unsortedArray: [
+      17, 2, 12, 16, 10, 6, 1, 14, 9, 
+      8, 5, 11, 19, 15, 3, 7, 20, 4, 
+      18, 13
+    ],
+    
+    largeNumArray: [],
+    generateLargeNumArray: function() {
+      var i = 0;
+      while (i < 240000) {
+        this.largeNumArray[i] = i;
+        i++;
       }
-      
-    return words;
-  };
-  
-  function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
+      return this.largeNumArray;
+    },
+    
+    //random array of strings generator
+    generateWords: function() {
+      var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+      var words = [];
+        while (!words.includes('abc')) {
+            var word = '';
+            for (var l = 0; l < 3; l++) {
+              var num = this.getRndInteger(0, 25);
+              var letter = letters[num];
+              word = word.concat(letter);
+            }
+            words.push(word);
+        }
+        
+      return words;
+    },
+    
+    getRndInteger: function(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+  }
+
+  window.binarySearchTester = binarySearchTester;
 }

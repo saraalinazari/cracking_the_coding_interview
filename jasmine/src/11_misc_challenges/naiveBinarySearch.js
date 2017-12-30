@@ -23,7 +23,7 @@ function binarySearch(array, searchedFor, chosenProcess) {
     result = recursiveBinarySearch(array, searchedFor);
   }
 
-  if(!(chosenProcess === 'recursive' || 'iterative')) {
+  if(chosenProcess !== 'recursive' && chosenProcess !== 'iterative') {
     throw new TypeError('Third parameter must be \'iterative\' or \'recursive\' to run function')
   }
 
@@ -37,7 +37,6 @@ function iterativeBinarySearch(array, searchedFor) {
   
   while (lowIndex <= highIndex) {
     testHelper.incrementSearchCounter();
-    // debugger;
       middleIndex = Math.floor((lowIndex + highIndex) / 2);
       searchGuess = array[middleIndex];
 
@@ -45,12 +44,12 @@ function iterativeBinarySearch(array, searchedFor) {
           return middleIndex;
       }
 
-      //if comparator is greater than searchGuess, move highIndex to the element below this guess
+      //if comparator is greater than searchedFor, move new highIndex to the element below comparator
       if (searchGuess > searchedFor) {
           highIndex = middleIndex - 1;
       }
 
-      //if comparator is less than searchGuess, move lowIndex to the element above this
+      //if comparator is less than serachedFor, move new lowIndex to the element above comparator
       if (searchGuess < searchedFor) {
           lowIndex = middleIndex + 1;
       }
