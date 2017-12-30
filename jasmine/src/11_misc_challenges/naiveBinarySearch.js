@@ -71,8 +71,10 @@ function recursiveBinarySearch(array, searchingFor, lowIndex, highIndex) {
     middleIndex, searchGuess;
   }
 
+  testHelper.incrementSearchCounter();
   middleIndex = Math.floor((lowIndex + highIndex) / 2);
   searchGuess = array[middleIndex];
+  array = array.sort();
 
   //base case
   if (searchGuess === searchingFor) {
@@ -91,7 +93,7 @@ function recursiveBinarySearch(array, searchingFor, lowIndex, highIndex) {
   }
 };
 
-//helper functions
+//helper functions (not currently used)
 function findMiddle(array) {
   let middleValuedlePosition = (Math.floor(array.length / 2));
   return array[middleValuedlePosition];

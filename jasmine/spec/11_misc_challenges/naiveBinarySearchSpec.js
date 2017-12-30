@@ -42,31 +42,25 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
 
     it('the number of actual searches required should match the predicted number of searches', function () {
 
-      function areSearchesWithinPredictedRange() {
-        return predictedRangeOfSearches.includes(testHelper.searches)
-      }
-
       let largeNumArray = binarySearchTester.generateLargeNumArray();
 
-      let predictedRangeOfSearches = [15, 16, 17, 18]
-
       binarySearch(largeNumArray, 1, 'iterative')
-      expect(areSearchesWithinPredictedRange()).toBeTruthy();
+      expect(binarySearchTester.areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 10, 'iterative')
-      expect(areSearchesWithinPredictedRange()).toBeTruthy();
+      expect(binarySearchTester.areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 100, 'iterative')
-      expect(areSearchesWithinPredictedRange()).toBeTruthy();
+      expect(binarySearchTester.areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 1000, 'iterative')
-      expect(areSearchesWithinPredictedRange()).toBeTruthy();
+      expect(binarySearchTester.areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 10000, 'iterative')
-      expect(areSearchesWithinPredictedRange()).toBeTruthy();
+      expect(binarySearchTester.areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 100000, 'iterative')
-      expect(areSearchesWithinPredictedRange()).toBeTruthy();
+      expect(binarySearchTester.areSearchesWithinPredictedRange()).toBeTruthy();
     });
   });
 });
@@ -97,7 +91,24 @@ describe('binarySearch (Recursive Version) Test Suite', function () {
     
 
     it('the number of actual searches required should match the predicted number of searches', function () {
-      fail();
+      debugger;
+      let numArray = binarySearchTester.generateNumArray();
+
+      binarySearch(numArray, 1, 'recursive')
+      expect(binarySearchTester.areSmallerSearchesWithinPredictedRange()).toBeTruthy();
+
+      binarySearch(numArray, 10, 'recursive')
+      expect(binarySearchTester.areSmallerSearchesWithinPredictedRange()).toBeTruthy();
+
+      binarySearch(numArray, 100, 'recursive')
+      expect(binarySearchTester.areSmallerSearchesWithinPredictedRange()).toBeTruthy();
+
+      // binarySearch(numArray, 125, 'recursive')
+      // expect(binarySearchTester.areSmallerSearchesWithinPredictedRange()).toBeTruthy();
+
+      // binarySearch(numArray, 10000, 'recursive')
+      // expect(binarySearchTester.areSmallerSearchesWithinPredictedRange()).toBeTruthy();
+
     });
 
   });
@@ -147,21 +158,17 @@ describe('error handling tests', function () {
 });
 
 function init() {
-
   binarySearchTester = {
-
     sortedArray: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
       11, 12, 13, 14, 15, 16, 17, 18,
       19, 20
     ],
-    
     unsortedArray: [
       17, 2, 12, 16, 10, 6, 1, 14, 9, 
       8, 5, 11, 19, 15, 3, 7, 20, 4, 
       18, 13
     ],
-    
     largeNumArray: [],
     generateLargeNumArray: function() {
       var i = 0;
@@ -171,7 +178,15 @@ function init() {
       }
       return this.largeNumArray;
     },
-    
+    numArray: [],
+    generateNumArray: function() {
+      var i = 0;
+      while (i < 10240) {
+        this.numArray[i] = i;
+        i++;
+      }
+      return this.numArray;
+    },
     //random array of strings generator
     generateWords: function() {
       var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -188,9 +203,16 @@ function init() {
         
       return words;
     },
-    
     getRndInteger: function(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
+    },
+    predictedRangeOfSearches: [15, 16, 17, 18],
+    areSearchesWithinPredictedRange: function() {
+      return this.predictedRangeOfSearches.includes(testHelper.searches)
+    },
+    smallerRangeOfSearches: [11, 12, 13, 14],
+    areSmallerSearchesWithinPredictedRange: function() {
+      return this.smallerRangeOfSearches.includes(testHelper.searches)
     }
   }
 
