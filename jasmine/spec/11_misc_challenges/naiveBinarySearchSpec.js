@@ -11,6 +11,9 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
 
       let result = binarySearch([1, 2, 3, 4, 5], 3, 'iterative');
       expect(result).toEqual(2);
+
+      result = binarySearch([1, 2, 3, 4, 5], 32, 'iterative');
+      expect(result).toEqual(null);
     
       result = binarySearch([20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 21, 'iterative');
       expect(result).toEqual(1);
@@ -22,7 +25,6 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
       expect(result).toEqual(3);
 
       let words = binarySearchTester.generateWords();
-      words.sort();
       result = binarySearch(words, 'abc', 'iterative');
       expect(result).toEqual(words.indexOf('abc'))
 
@@ -39,17 +41,6 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
     });
 
     it('the number of actual searches required should match the predicted number of searches', function () {
-
-      // function createLargeNumArray() {
-      //   let largeNumArray = [];
-      //   var i = 0;
-      //   while (i < 240000) {
-      //     largeNumArray[i] = i;
-      //     i++;
-      //   }
-
-      //   return largeNumArray;
-      // }
 
       function areSearchesWithinPredictedRange() {
         return predictedRangeOfSearches.includes(testHelper.searches)
@@ -85,13 +76,25 @@ describe('binarySearch (Recursive Version) Test Suite', function () {
 
   describe('build tests', function () {
 
-    it('RECURSIVE ONLY - it should call itself with a new array that is the original array split at the inital division (split to the left)', function () {
-      fail();
+    it('should be able to find the matching value index of the original array and return this', function () {
+      let result = binarySearch([1, 2, 3, 4, 5], 3, 'recursive');
+      expect(result).toEqual(2);
+    
+      result = binarySearch([20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 21, 'recursive');
+      expect(result).toEqual(1);
+    
+      result = binarySearch(['a', 'b', 'c', 'd', 'e'], 'c', 'recursive');
+      expect(result).toEqual(2);
+
+      result = binarySearch([1, 2, 4, 5, 6, 8], 5, 'recursive');
+      expect(result).toEqual(3);
+
+      let words = binarySearchTester.generateWords();
+      result = binarySearch(words, 'abc', 'recursive');
+      expect(result).toEqual(words.indexOf('abc'))
     });
 
-    it('RECURSIVE ONLY - it should call itself with a new array that is the original array split at the inital division (split to the right)', function () {
-      fail();
-    });
+    
 
     it('the number of actual searches required should match the predicted number of searches', function () {
       fail();
@@ -134,8 +137,10 @@ describe('error handling tests', function () {
       
     });
 
-    it('it should be able to detect unsorted arrays and ask the user for sorting parameters', function () {
-      fail();
+    it('it should be able to detect unsorted arrays and sort', function () {
+  
+      let result = binarySearch([6, 5, 2, 1, 3], 6, 'iterative');
+      expect(result).toEqual(4);
     });
 
   });
