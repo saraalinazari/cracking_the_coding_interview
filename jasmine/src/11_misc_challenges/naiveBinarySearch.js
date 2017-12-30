@@ -23,32 +23,32 @@ function binarySearch(array, searchedFor, chosenProcess) {
   return result;
 };
 
-
-//
 function iterativeBinarySearch(array, searchedFor) {
   let lowIndex = 0;
   let highIndex = array.length - 1;
-  let middleValue, searchGuess;
+  let middleIndex, searchGuess;
   
   while (lowIndex <= highIndex) {
     testHelper.incrementSearchCounter();
-      middleValue = Math.floor((lowIndex + highIndex) / 2);
-      searchGuess = array[middleValue];
+    // debugger;
+      middleIndex = Math.floor((lowIndex + highIndex) / 2);
+      searchGuess = array[middleIndex];
 
-      if (searchGuess === searchGuess) {
-          return middleValue;
+      if (searchGuess === searchedFor) {
+          return middleIndex;
       }
 
       //if comparator is greater than searchGuess, move highIndex to the element below this guess
-      if (searchGuess > searchGuess) {
-          highIndex = middleValue - 1;
+      if (searchGuess > searchedFor) {
+          highIndex = middleIndex - 1;
       }
 
       //if comparator is less than searchGuess, move lowIndex to the element above this
-      if (searchGuess < searchGuess) {
-          lowIndex = middleValue + 1;
+      if (searchGuess < searchedFor) {
+          lowIndex = middleIndex + 1;
       }
   }
+  
   return null;
 };
 

@@ -9,8 +9,18 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
 
     it('should be able to find the matching value index of the original array and return this', function() {
 
-      let result = binarySearch([1, 2, 3], 3, 'iterative');
+      let result = binarySearch([1, 2, 3, 4, 5], 3, 'iterative');
       expect(result).toEqual(2);
+    
+      result = binarySearch([20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 21, 'iterative');
+      expect(result).toEqual(1);
+    
+      result = binarySearch(['a', 'b', 'c', 'd', 'e'], 'c', 'iterative');
+      expect(result).toEqual(2);
+
+      result = binarySearch([1, 2, 4, 5, 6, 8], 5, 'iterative');
+      expect(result).toEqual(3);
+
     });
 
     it('it should be able to work out the minimal number of searches required of any index', function () {
@@ -18,7 +28,7 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
     });
 
     it('the number of actual searches required should match the predicted number of searches', function () {
-      binarySearch([1, 2, 3], 3, 'iterative');
+      binarySearch([1, 2, 3, 4, 5], 3, 'iterative');
       expect(testHelper.searches).toEqual(2);
 
       let rangeOfResults = [15, 16, 17, 18]
