@@ -73,33 +73,8 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
       binarySearch(largeNumArray, 100000, 'iterative')
       expect(areSearchesWithinPredictedRange()).toBeTruthy();
     });
-
-  });
-
-  describe('runtime tests', function () {
-
-    it('it should be able to process large arrays quickly', function () {
-      fail();
-    });
-
-    it('it should be able to process large arrays quickly in comparison to a dumb linear algorithm', function () {
-      fail();
-    });
   });
 });
-
-describe('error handling tests', function () {
-
-  describe('invalid parameters', function () {
-
-    it('it should be able to detect unsorted arrays and ask the user for sorting parameters', function () {
-      fail();
-    });
-
-  });
-});
-
-
 //RECURSIVE TESTS
 
 describe('binarySearch (Recursive Version) Test Suite', function () {
@@ -114,42 +89,25 @@ describe('binarySearch (Recursive Version) Test Suite', function () {
       fail();
     });
 
-    it('it should be able to work out the maximum number of searches required of any index', function () {
-      fail();
-    });
-
     it('the number of actual searches required should match the predicted number of searches', function () {
       fail();
     });
 
   });
+});
 
-  describe('runtime tests', function () {
+describe('error handling tests', function () {
 
+  describe('invalid parameters', function () {
 
-    it('it should be able to process large arrays quickly', function () {
+    it('it should require the user to choose iterative or recursive functionality before processing', function () {
       fail();
     });
 
-    it('it should be able to process large arrays quickly in comparison to a dumb linear algorithm', function () {
+    it('it should be able to detect unsorted arrays and ask the user for sorting parameters', function () {
       fail();
     });
 
-  });
-
-  describe('error handling tests', function () {
-
-    describe('invalid parameters', function () {
-
-      it('it should require the user to choose iterative or recursive functionality before processing', function () {
-        fail();
-      });
-
-      it('it should be able to detect unsorted arrays and ask the user for sorting parameters', function () {
-        fail();
-      });
-
-    });
   });
 });
 
@@ -194,4 +152,3 @@ function init() {
     return Math.floor(Math.random() * (max - min)) + min;
   };
 }
-
