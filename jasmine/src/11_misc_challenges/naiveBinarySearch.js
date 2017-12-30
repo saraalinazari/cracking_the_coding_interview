@@ -1,116 +1,77 @@
-const testData = {
-  searches: 0
+const testHelper = {
+  searches: 0,
+  incrementSearchCounter: function() {
+    this.searches++;
+  }
 }
 
-function naiveBinarySearch(array, searchingFor, chosenProcess) {
-
-  testDevHelper(array, searchingFor, chosenProcess);
-    
-  if (chosenProcess === 'iterative') {
-    testDevHelper(array, searchingFor, chosenProcess);
-
-    let initalMiddle, middleOfArray, lowerOrHigher, dividedArray, matchedIndex;
-
-    middleOfArray = findMiddleValue(array);
-    dividedArray = array.slice(0);
-
-    while (middleOfArray !== searchingFor && !matchedIndex) {
-      testData.searches++;
-      //find middle value
-      middleOfArray = findMiddleValue(dividedArray);
-
-      if (dividedArray.length > 1) {
-        //check if middle value is higher or lower than searchedFor value and return remaining array
-        dividedArray = compare(searchingFor, dividedArray);
-        //repeat these steps whilst found value != searchingFor
-      }
-      
-      if (middleOfArray === searchingFor) {
-        matchedIndex = array.indexOf(middleOfArray);
-      }
-      
-    }
-
-    //return index of matched
-    return matchedIndex;
+//iterative version
+function binarySearch(array, searchedFor, chosenProcess) {
+  let result;
+  if(chosenProcess === 'iterative') {
+    result = iterativeBinarySearch(array, searchedFor);
   }
 
-  if (chosenProcess === 'recursive') {
-
-    testDevHelper(array, searchingFor, chosenProcess);
-
-    //define variables for inital start and end values
-    //find middle value
-    //check if middle value is higher or lower than searchedFor value
-    //repeat these steps whilst found value != searchingFor
-    //if found, assign to var matched
-    //return index of matched
+  if(chosenProcess === 'recursive') {
+    result = recursiveBinarySearch(array, searchedFor);
   }
+
+  if(!(chosenProcess === 'recursive' || 'iterative')) {
+    throw new TypeError('Third parameter must be \'iterative\' or \'recursive\' to run function')
+  }
+
+  return result;
 };
 
 
+//
+function iterativeBinarySearch(array, searchedFor) {
+  let lowIndex = 0;
+  let highIndex = array.length - 1;
+  let middleValue, searchGuess;
+  
+  while (lowIndex <= highIndex) {
+    testHelper.incrementSearchCounter();
+      middleValue = Math.floor((lowIndex + highIndex) / 2);
+      searchGuess = array[middleValue];
+
+      if (searchGuess === searchGuess) {
+          return middleValue;
+      }
+
+      //if comparator is greater than searchGuess, move highIndex to the element below this guess
+      if (searchGuess > searchGuess) {
+          highIndex = middleValue - 1;
+      }
+
+      //if comparator is less than searchGuess, move lowIndex to the element above this
+      if (searchGuess < searchGuess) {
+          lowIndex = middleValue + 1;
+      }
+  }
+  return null;
+};
+
+
+function recursiveBinarySearch(array, searchedFor) {
+
+};
+
+//helper functions
+function findMiddle(array) {
+  let middleValuedlePosition = (Math.floor(array.length / 2));
+  return array[middleValuedlePosition];
+}
 
 function compare(searchingFor, array) {
-  debugger;
-  return (searchingFor > findMiddleValue(array) ? ifHigher : ifLower)(array);
+  return (searchingFor > findMiddle(array) ? ifHigher : ifLower)(array);
 };
 
 function ifHigher(array) {
-  return array.slice(array.indexOf(findMiddleValue(array)) + 1);
+  return array.slice(array.indexOf(findMiddle(array)));
 }
 
 function ifLower(array) {
-  return array.slice(0, array.indexOf(findMiddleValue(array)));
+  return array.slice(0, array.indexOf(findMiddle(array)));
 }
-
-function findMiddleValue(array) {
-  let middlePosition = (Math.floor(array.length / 2));
-  return array[middlePosition];
-}
-
-/**
-function compare(searchingFor, middleOfArray, array) {
-  return (searchingFor > middleOfArray ? ifHigher : ifLower)(array, middleOfArray);
-}
-function ifHigher(array, middleOfArray) {
-  return array.slice(array.indexOf(middleOfArray) + 1);
-}
-
-function ifLower(array, middleOfArray) {
-  return array.slice(0, array.indexOf(middleOfArray));
-}
-
-function findMiddleValue(array) {
-  let middlePosition = (Math.floor(array.length / 2));
-  return array[middlePosition];
-}
-*/
-
-function testDevHelper(array, searchingFor, chosenProcess) {
-  //reset search counter in between test runs
-  testData.searches = 0;
-  
-  //set parameter values for testing
-  sortedArray ? testData.passedArray = array : null;
-  searchingFor ? testData.searchingFor = searchingFor : null;
-  chosenProcess ? testData.chosenProcess = chosenProcess : null;
-
-  testData.maximumSearches = Math.log2(array.length);
-
-    if (chosenProcess && chosenProcess !== 'recursive' && chosenProcess !== 'iterative') {
-      throw new TypeError('The third parameter must be either \'iterative\' or \'recursive\' to run');
-    }
-  };
-
-let sortedArray = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  11, 12, 13, 14, 15, 16, 17, 18,
-  19, 20
-];
-
-let unsortedArray = [
-  17, 2, 12, 16, 10, 6, 1, 14, 9, 
-  8, 5, 11, 19, 15, 3, 7, 20, 4, 
-  18, 13
-];
 
