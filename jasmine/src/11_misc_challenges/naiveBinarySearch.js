@@ -2,11 +2,18 @@ const testHelper = {
   searches: 0,
   incrementSearchCounter: function() {
     this.searches++;
+  },
+  resetSearchCounter: function() {
+    this.searches = 0;
+  },
+  maximumSearches: function(arrayElements) {
+    return Math.round(Math.log2(arrayElements));
   }
 }
 
 //iterative version
 function binarySearch(array, searchedFor, chosenProcess) {
+  testHelper.resetSearchCounter();
   let result;
   if(chosenProcess === 'iterative') {
     result = iterativeBinarySearch(array, searchedFor);
@@ -48,7 +55,7 @@ function iterativeBinarySearch(array, searchedFor) {
           lowIndex = middleIndex + 1;
       }
   }
-  
+
   return null;
 };
 

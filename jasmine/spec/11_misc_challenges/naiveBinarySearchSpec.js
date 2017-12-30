@@ -24,32 +24,54 @@ describe('binarySearch (Iterative Version) Test Suite', function () {
     });
 
     it('it should be able to work out the minimal number of searches required of any index', function () {
-      fail();
+      expect(testHelper.maximumSearches(4)).toEqual(2);
+      expect(testHelper.maximumSearches(8)).toEqual(3);
+      expect(testHelper.maximumSearches(16)).toEqual(4);
+      expect(testHelper.maximumSearches(32)).toEqual(5);
+      expect(testHelper.maximumSearches(64)).toEqual(6);
+      expect(testHelper.maximumSearches(1024)).toEqual(10);
+      expect(testHelper.maximumSearches(240000)).toEqual(18);
     });
 
     it('the number of actual searches required should match the predicted number of searches', function () {
-      binarySearch([1, 2, 3, 4, 5], 3, 'iterative');
-      expect(testHelper.searches).toEqual(2);
+
+      function createLargeNumArray() {
+        let largeNumArray = [];
+        var i = 0;
+        while (i < 240000) {
+          largeNumArray[i] = i;
+          i++;
+        }
+
+        return largeNumArray;
+      }
+
+      function areSearchesWithinPredictedRange() {
+        return rangeOfResults.includes(testHelper.searches)
+      }
+
+      let largeNumArray = createLargeNumArray();
 
       let rangeOfResults = [15, 16, 17, 18]
 
+
       binarySearch(largeNumArray, 1, 'iterative')
-      expect(rangeOfResults.includes(testHelper.searches)).toBeTruthy();
+      expect(areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 10, 'iterative')
-      expect(rangeOfResults.includes(testHelper.searches)).toBeTruthy();
+      expect(areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 100, 'iterative')
-      expect(rangeOfResults.includes(testHelper.searches)).toBeTruthy();
+      expect(areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 1000, 'iterative')
-      expect(rangeOfResults.includes(testHelper.searches)).toBeTruthy();
+      expect(areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 10000, 'iterative')
-      expect(rangeOfResults.includes(testHelper.searches)).toBeTruthy();
+      expect(areSearchesWithinPredictedRange()).toBeTruthy();
 
       binarySearch(largeNumArray, 100000, 'iterative')
-      expect(rangeOfResults.includes(testHelper.searches)).toBeTruthy();
+      expect(areSearchesWithinPredictedRange()).toBeTruthy();
     });
 
   });
