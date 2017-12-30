@@ -103,6 +103,12 @@ describe('binarySearch (Recursive Version) Test Suite', function () {
       binarySearch(numArray, 100, 'recursive')
       expect(binarySearchTester.areSmallerSearchesWithinPredictedRange()).toBeTruthy();
 
+
+
+
+      //**************DEBUG NEEDED****************:
+      //browser exceeds call stack limit when searching for the number 125 (and greater) within an array of 10240 length
+
       // binarySearch(numArray, 125, 'recursive')
       // expect(binarySearchTester.areSmallerSearchesWithinPredictedRange()).toBeTruthy();
 
