@@ -37,12 +37,15 @@
  */
 
  function myIsUnique(string) {
+    if (typeof string !== 'string') {
+        throw new TypeError('Only strings can be compared')
+    }
+
     for (let i = 0; i < string.length; i++) {
         for (let j = i + 1; j < string.length; j++) {
-            counter++;
+            // testCallback(i, j, string);
             if (string[i] === string[j]) {
                 //if match then string is not unique
-                console.log(counter);
                 return false;
             }
         }
