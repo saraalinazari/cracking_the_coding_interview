@@ -19,49 +19,25 @@ describe('myIsUnique Tests', function() {
         })
 
         it('it should return true if the string contains all unique characters', function() {
-            result = myIsUnique('abc');
-            expect(result).toBeTruthy();
 
-            result = myIsUnique('abcdef');
-            expect(result).toBeTruthy();
+            let validStrings = ['abc', 'abcdef', 'abc d', 'noduplicates', '123', '1234567890', ',./;\'[]'];
 
-            result = myIsUnique('abc d');
-            expect(result).toBeTruthy();
-
-            result = myIsUnique('noduplicates');
-            expect(result).toBeTruthy();
-
-            result = myIsUnique('123');
-            expect(result).toBeTruthy();
-
-            result = myIsUnique('1234567890');
-            expect(result).toBeTruthy();
-
-            result = myIsUnique(',./;\'[]');
-            expect(result).toBeTruthy();
+            validStrings.forEach(function(string){
+                result = myIsUnique(string);
+                expect(result).toBeTruthy();
+            });
+            
         });
     
         it('it should return false if the string contains any duplicate characters', function() {
-            result = myIsUnique('abca');
-            expect(result).toBeFalsy();
 
-            result = myIsUnique('abcdefe');
-            expect(result).toBeFalsy();
+            let invalidStrings = ['abca', 'abcdefe', 'abc d ', 'oneduplicate', 'twosduplicate', '12345678901', ',./;\'[],'];
 
-            result = myIsUnique('abc d ');
-            expect(result).toBeFalsy();
-
-            result = myIsUnique('oneduplicate');
-            expect(result).toBeFalsy();
-
-            result = myIsUnique('twosduplictes');
-            expect(result).toBeFalsy();
-
-            result = myIsUnique('12345678901');
-            expect(result).toBeFalsy();
-
-            result = myIsUnique(',./;\'[],');
-            expect(result).toBeFalsy();
+            invalidStrings.forEach(function(string){
+                result = myIsUnique(string);
+                expect(result).toBeFalsy();
+            });
+            
         });
 
     });
