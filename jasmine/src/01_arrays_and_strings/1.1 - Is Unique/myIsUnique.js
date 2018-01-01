@@ -36,14 +36,14 @@
  * Is it possible/wise to do this recursively? Try both.
  */
 
- function myIsUnique(string) {
+ function myIsUnique(string, testCallback) {
     if (typeof string !== 'string') {
         throw new TypeError('Only strings can be compared')
     }
 
     for (let i = 0; i < string.length; i++) {
         for (let j = i + 1; j < string.length; j++) {
-            // testCallback(i, j, string);
+            testCallback(i, j, string);
             if (string[i] === string[j]) {
                 //if match then string is not unique
                 return false;

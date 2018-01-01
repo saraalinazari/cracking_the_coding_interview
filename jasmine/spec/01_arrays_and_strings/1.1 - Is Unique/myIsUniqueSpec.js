@@ -23,7 +23,7 @@ describe('myIsUnique Tests', function() {
             let validStrings = ['abc', 'abcdef', 'abc d', 'noduplicates', '123', '1234567890', ',./;\'[]'];
 
             validStrings.forEach(function(string){
-                result = myIsUnique(string);
+                result = myIsUnique(string, function(){});
                 expect(result).toBeTruthy();
             });
             
@@ -34,7 +34,7 @@ describe('myIsUnique Tests', function() {
             let invalidStrings = ['abca', 'abcdefe', 'abc d ', 'oneduplicate', 'twosduplicate', '12345678901', ',./;\'[],'];
 
             invalidStrings.forEach(function(string){
-                result = myIsUnique(string);
+                result = myIsUnique(string, function(){});
                 expect(result).toBeFalsy();
             });
             
@@ -45,15 +45,36 @@ describe('myIsUnique Tests', function() {
     describe('iteration value checking tests', function() {
 
         it('the second comparator (\'j\') should always be one increment higher than the first comparator (\'i\')', function(){
-
+            let first, second;
+            myIsUnique('abc', function(firstComparator, secondComparator, string){
+                // expect(firstComparator).toEqual(secondComparator - 1);
+                first = firstComparator;
+                second = secondComparator;
+            });
+            expect(first).toEqual(second - 1);
         });
 
         it('\'i\') should never be used for element value comparison if reaches string length', function() {
+            let first, second, stringLength;
+            myIsUnique('abc', function(firstComparator, secondComparator, string){
+                // expect(firstComparator).toEqual(secondComparator - 1);
+                first = firstComparator;
+                second = secondComparator;
+                stringLength = string.length;
 
+            });
+            expect(first).toBeLessThan(stringLength);
         });
 
         it('\'j\') should never be used for element value comparison if reaches string length', function() {
-
+            let first, second;
+            myIsUnique('abc', function(firstComparator, secondComparator, string){
+                // expect(firstComparator).toEqual(secondComparator - 1);
+                first = firstComparator;
+                second = secondComparator;
+                stringLength = string.length;
+            });
+            expect(second).toBeLessThan(stringLength);
         });
     });
 
@@ -67,7 +88,7 @@ describe('myIsUnique Tests', function() {
 
             invalidTypes.forEach(function(type){
                 try {
-                    myIsUnique(type);
+                    myIsUnique(type, function(){});
                 } catch(e) {
                     error = e;
                 }
