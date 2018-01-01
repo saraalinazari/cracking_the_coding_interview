@@ -31,3 +31,23 @@
  * 
 */
 
+/**
+ * Brute force - check each letter against every other letter, starting with index 0 and incrementing by one until all possible comparisons have been achieved. If index -1 is reached, return true. On finding a duplicate character, return false.
+ * Is it possible/wise to do this recursively? Try both.
+ */
+
+ function myIsUnique(string) {
+    for (let i = 0; i < string.length; i++) {
+        for (let j = i + 1; j < string.length; j++) {
+            counter++;
+            if (string[i] === string[j]) {
+                //if match then string is not unique
+                console.log(counter);
+                return false;
+            }
+        }
+    }
+    //if no match then string is unique
+    return true;
+ }
+
