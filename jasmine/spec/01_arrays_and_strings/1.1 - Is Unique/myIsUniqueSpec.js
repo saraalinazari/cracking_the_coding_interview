@@ -85,6 +85,20 @@ describe('myIsUnique Tests', function() {
 
         it('should reject any parameter value that is not a string', function() {
 
+            let invalidTypes = [null, undefined, true, false, [1, 2, 3], {one: 1}, 1, 0, 0.1, Infinity, !Infinity]
+
+            let error;
+
+            invalidTypes.forEach(function(type){
+                try {
+                    myIsUnique(type);
+                } catch(e) {
+                    error = e;
+                }
+
+                expect(error instanceof TypeError).toBeTruthy();
+            });
+
         });
 
     });
